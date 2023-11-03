@@ -9,37 +9,42 @@ var rotationSpeed: float = 0.5
 var windowSize = Vector2(0,0)
 var spriteSize = Vector2(0,0)
 
-var framesSinceBounce = 1000
+# How many frames count as a double bounce to reverse sprite direction
+var doubleBounceSensitivity = 10
+var framesSinceBounce = doubleBounceSensitivity + 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# get initial sizes and set initial position
 	windowSize = get_window().size
 	spriteSize = Vector2( texture.get_width(), texture.get_height() )
 	pos = Vector2(windowSize.x / 2, windowSize.y / 2)
 
 	position = pos
 	rotation_degrees = rot
-	
-
-	print(spriteSize)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	windowSize = get_window().size
 	
+	# Sprite  Diameter
 	var dy = spriteSize.y / 2
 	var dx = spriteSize.x / 2
+	
+	# Sprite's extremity positions relative to canvas.
 	var topPos = pos.y - dy
 	var rightPos = pos.x + dx
 	var bottomPos = pos.y + dy
 	var leftPos = pos.x - dx
 	
+	# Set states for detecting bounce
 	var topBounced = false
 	var rightBounced = false
 	var bottomBounced = false
 	var leftBounced = false
 	
+	# detect bounces
 	if ( topPos <= 0 ) :
 		speed = Vector2(speed.x, -1 * speed.y)
 		topBounced = true
@@ -60,19 +65,20 @@ func _process(delta):
 		leftBounced = true
 		updateFramesSinceBounce()
 		
-	if ( (topBounced && rightBounced) || (rightBounced && bottomBounced) || (bottomBounced && leftBounced) || (leftBounced && topBounced) ) :
-		rotationSpeed = rotationSpeed * -2
 		
+	# set position and rotation
 	pos += speed
 	position = pos
 	
 	rot += rotationSpeed
 	rotation_degrees = rot
 	
+	#continue frame count for bounce direction / updateFrameSinceBounce()
 	framesSinceBounce += 1
 	
+# function to check if bounces happen within 10 frames, and to reset frames on bounce
 func updateFramesSinceBounce() :
-	if (framesSinceBounce < 10) :
+	if (framesSinceBounce < doubleBounceSensitivity) :
 		rotationSpeed = rotationSpeed * -1.05
 	framesSinceBounce = 0
 	
