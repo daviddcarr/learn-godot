@@ -1,7 +1,7 @@
 extends Sprite2D
 
 var pos: Vector2 = Vector2.ZERO
-var speed: Vector2 = Vector2(5, 5)
+var speed: Vector2 = Vector2(200, 200)
 
 var rot: float = 0.0
 var rotationSpeed: float = 0.5
@@ -21,8 +21,11 @@ func _ready():
 	pos = Vector2(windowSize.x / 2, windowSize.y / 2)
 
 	position = pos
-	rotation_degrees = rot
-
+	#rotation_degrees = rot
+	
+	# Get Parent Node
+	print($"..".test_array)
+	$"..".test_function()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,11 +70,11 @@ func _process(delta):
 		
 		
 	# set position and rotation
-	pos += speed
+	pos += speed * delta
 	position = pos
 	
 	rot += rotationSpeed
-	rotation_degrees = rot
+	#rotation_degrees = rot
 	
 	#continue frame count for bounce direction / updateFrameSinceBounce()
 	framesSinceBounce += 1
