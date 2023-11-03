@@ -4,10 +4,12 @@ var pos: Vector2 = Vector2.ZERO
 var speed: Vector2 = Vector2(5, 5)
 
 var rot: float = 0.0
-const rotationSpeed: float = 0.5
+var rotationSpeed: float = 0.5
 
 var windowSize = Vector2(0,0)
 var spriteSize = Vector2(0,0)
+
+var framesSinceBounce = 1000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,23 +35,46 @@ func _process(delta):
 	var bottomPos = pos.y + dy
 	var leftPos = pos.x - dx
 	
+	var topBounced = false
+	var rightBounced = false
+	var bottomBounced = false
+	var leftBounced = false
+	
 	if ( topPos <= 0 ) :
 		speed = Vector2(speed.x, -1 * speed.y)
+		topBounced = true
+		updateFramesSinceBounce()
 		
 	if ( rightPos >= windowSize.x ) :
 		speed = Vector2(-1 * speed.x, speed.y)
+		rightBounced = true
+		updateFramesSinceBounce()
 		
 	if ( bottomPos >= windowSize.y ) :
 		speed = Vector2(speed.x, -1 * speed.y)
+		bottomBounced = true
+		updateFramesSinceBounce()
 	
 	if ( leftPos <= 0 ) :
 		speed = Vector2(-1 * speed.x, speed.y)
+		leftBounced = true
+		updateFramesSinceBounce()
+		
+	if ( (topBounced && rightBounced) || (rightBounced && bottomBounced) || (bottomBounced && leftBounced) || (leftBounced && topBounced) ) :
+		rotationSpeed = rotationSpeed * -2
 		
 	pos += speed
 	position = pos
 	
 	rot += rotationSpeed
 	rotation_degrees = rot
+	
+	framesSinceBounce += 1
+	
+func updateFramesSinceBounce() :
+	if (framesSinceBounce < 10) :
+		rotationSpeed = rotationSpeed * -1.05
+	framesSinceBounce = 0
 	
 	
 	
