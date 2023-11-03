@@ -1,7 +1,7 @@
 extends Sprite2D
 
 var pos: Vector2 = Vector2.ZERO
-const speed: Vector2 = Vector2(0.5, 0.5)
+var speed: Vector2 = Vector2(5, 5)
 
 var rot: float = 0.0
 const rotationSpeed: float = 0.5
@@ -33,6 +33,18 @@ func _process(delta):
 	var bottomPos = pos.y + dy
 	var leftPos = pos.x - dx
 	
+	if ( topPos <= 0 ) :
+		speed = Vector2(speed.x, -1 * speed.y)
+		
+	if ( rightPos >= windowSize.x ) :
+		speed = Vector2(-1 * speed.x, speed.y)
+		
+	if ( bottomPos >= windowSize.y ) :
+		speed = Vector2(speed.x, -1 * speed.y)
+	
+	if ( leftPos <= 0 ) :
+		speed = Vector2(-1 * speed.x, speed.y)
+		
 	pos += speed
 	position = pos
 	
