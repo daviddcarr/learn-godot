@@ -1,28 +1,29 @@
 extends Node2D
 
-var test_array: Array[String] = ["Test", "Hello", "World"]
+var laser_scene : PackedScene = preload("res://scenes/objects/projectiles/laser.tscn")
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	#get_node("Logo").rotation_degrees = 90
-	$Logo.rotation_degrees = 90
+func _on_gate_player_entered_gate(_body):
+	print("Player has entered gate")
 	
-	for i in test_array:
-		print(i)
-		
-	# Access as Unique Name % does this:
-	# %Target = $Sprite2D/Sprite2D2/Sprite2D3/Target
+
+
+func _on_gate_player_exited_gate(_body):
+	print("Player has exited gate")
+
+
+func _on_player_physics_player_fired_laser(pos, rot):
+	print("laser from level")
+	var laser = laser_scene.instantiate()
 	
-func _process(delta):
-	$Logo.rotation_degrees += 10 * delta
+	# 1. update the laser position
+	laser.position = pos
+	laser.rotation = rot
+	
+	# 2. we have to move the laser
+	# 3. Add laser instance to a Node2D
+	add_child(laser)
 
-	if $Logo.rotation_degrees > 180 :
-		$Logo.rotation_degrees = 0
 
-	#if Input.is_action_pressed("left") :
-	#	$Logo.scale += Vector2(0.25, 0.25)
-
-
-func test_function() :
-	print("This is a test function")
+func _on_player_physics_player_fired_grenade():
+	print("grenade from level")
