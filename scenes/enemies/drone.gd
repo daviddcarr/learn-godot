@@ -9,6 +9,9 @@ var spriteSize = Vector2(0,0)
 
 var currentPosition = Vector2(0,0)
 
+@export var HEALTH = 20
+var currentHealth = HEALTH
+
 func _ready():
 	windowSize = get_window().size
 	spriteSize = Vector2( $Sprite2D.texture.get_width() * $Sprite2D.scale.x, $Sprite2D.texture.get_height() * $Sprite2D.scale.y )
@@ -74,7 +77,11 @@ func updateFramesSinceBounce() :
 	if ( speed.x < 0 && speed.y < 0 ) :
 		rotation_degrees = -45
 
-	
+func hit(amount) :
+	currentHealth -= amount
+	if currentHealth <= 0 :
+		print("Drone destroyed")
+		queue_free()
 
 
 

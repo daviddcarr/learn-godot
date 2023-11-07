@@ -1,21 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://r5scpyy2bnhg"]
+[gd_scene load_steps=5 format=3 uid="uid://r5scpyy2bnhg"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_gea0j"]
 [ext_resource type="PackedScene" uid="uid://cf1p4sguold0w" path="res://scenes/player/player.tscn" id="2_a8565"]
-[ext_resource type="PackedScene" uid="uid://opnxbwexcshu" path="res://scenes/objects/gate.tscn" id="3_8ute2"]
+[ext_resource type="Texture2D" uid="uid://tcj77wmg3sm" path="res://graphics/lights/textures/circle.png" id="3_2p53x"]
+[ext_resource type="PackedScene" uid="uid://xs70d2xbkx8x" path="res://scenes/ui/user_interface.tscn" id="4_omqi3"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_gea0j")
 
+[node name="Ground" type="Node2D" parent="."]
+
 [node name="Projectiles" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
 
 [node name="player" parent="." instance=ExtResource("2_a8565")]
 position = Vector2(574, 495)
 
-[node name="Gate" parent="." instance=ExtResource("3_8ute2")]
-position = Vector2(592, -566)
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(0.6, 0.6)
+position_smoothing_enabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="player"]
+position = Vector2(54, 12)
+energy = 1.03
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = ExtResource("3_2p53x")
+texture_scale = 3.0
+
+[node name="Lights" type="Sprite2D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("4_omqi3")]
 
 [connection signal="player_fired_grenade" from="player" to="." method="_on_player_physics_player_fired_grenade"]
 [connection signal="player_fired_laser" from="player" to="." method="_on_player_physics_player_fired_laser"]
-[connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
-[connection signal="player_exited_gate" from="Gate" to="." method="_on_gate_player_exited_gate"]
+[connection signal="update_stats" from="player" to="." method="_on_player_update_stats"]

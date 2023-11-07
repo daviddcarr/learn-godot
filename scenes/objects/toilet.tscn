@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dwry3bq42mnoa" path="res://graphics/objects/toilet.png" id="1_5p41x"]
 
 [node name="toilet" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 11
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.60251, 0.60251)

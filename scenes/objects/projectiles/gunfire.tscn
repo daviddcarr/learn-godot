@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://qsuawaf76c7q"]
+
+[ext_resource type="Texture2D" uid="uid://l1uj7v640jlc" path="res://graphics/decals/white.png" id="1_yqck4"]
+
+[sub_resource type="Gradient" id="Gradient_3ik1x"]
+colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.6, 0.6, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wv3ry"]
+gradient = SubResource("Gradient_3ik1x")
+
+[sub_resource type="Curve" id="Curve_1uijf"]
+_data = [Vector2(0, 0), 0.0, 8.75088, 0, 0, Vector2(0.300493, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0210526), -4.27368, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6q8er"]
+curve = SubResource("Curve_1uijf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_amhae"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 83.72
+initial_velocity_max = 214.55
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_max = 18.19
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_6q8er")
+color = Color(0.823529, 0.823529, 0.823529, 0.65098)
+color_ramp = SubResource("GradientTexture1D_wv3ry")
+turbulence_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_cwerx"]
+offsets = PackedFloat32Array(0, 0.464, 1)
+colors = PackedColorArray(0.732523, 0.921274, 1, 1, 0.541975, 0.996255, 1, 1, 0, 0.588235, 0.729412, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_trih8"]
+gradient = SubResource("Gradient_cwerx")
+
+[sub_resource type="Curve" id="Curve_tye6t"]
+_data = [Vector2(0, 0), 0.0, 7.02105, 0, 0, Vector2(0.327586, 1), 0.0, 0.0, 0, 0, Vector2(0.997537, 0.0105263), -2.91388, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_n32ho"]
+curve = SubResource("Curve_tye6t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vt0fi"]
+particle_flag_disable_z = true
+spread = 15.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 442.71
+initial_velocity_max = 605.06
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.1
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_n32ho")
+color_ramp = SubResource("GradientTexture1D_trih8")
+
+[node name="Gunfire" type="GPUParticles2D"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_amhae")
+texture = ExtResource("1_yqck4")
+lifetime = 1.65
+one_shot = true
+explosiveness = 1.0
+
+[node name="Sparks" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_vt0fi")
+texture = ExtResource("1_yqck4")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true

@@ -4,27 +4,32 @@
 [ext_resource type="Script" path="res://scenes/enemies/drone_patrol.gd" id="1_tiay5"]
 
 [node name="Drone" type="CharacterBody2D"]
-position = Vector2(575, 368)
+position = Vector2(77, 130)
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_tiay5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
 scale = Vector2(0.316456, 0.316456)
 texture = ExtResource("1_22nta")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-0.34375, 0)
-rotation = 1.5708
 scale = Vector2(0.3125, 0.3125)
 polygon = PackedVector2Array(0, 74, 54, 65, 75, 5, 151, 3, 138, -35, 56, -41, 31, -69, 1, -74, -40, -61, -59, -37, -146, -14, -152, 20, -67, 14, -53, 59)
 
 [node name="waypoints" type="Node2D" parent="."]
 
-[node name="waypointA" type="Marker2D" parent="waypoints"]
-position = Vector2(500, -1)
+[node name="waypointA" type="Node2D" parent="waypoints"]
+position = Vector2(0, -101)
+
+[node name="Marker2D" type="Marker2D" parent="waypoints/waypointA"]
+position = Vector2(38, -6)
 gizmo_extents = 40.0
 
-[node name="waypointB" type="Marker2D" parent="waypoints"]
+[node name="waypointB" type="Node2D" parent="waypoints"]
+position = Vector2(0, 143)
+
+[node name="Marker2D" type="Marker2D" parent="waypoints/waypointB"]
+position = Vector2(-48, 13)
 gizmo_extents = 40.0

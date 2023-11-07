@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://jahnvby6mcvc"]
+
+[ext_resource type="PackedScene" uid="uid://00v2xp0caklg" path="res://scenes/objects/ItemContainers/item_container.tscn" id="1_d3064"]
+[ext_resource type="Texture2D" uid="uid://dwry3bq42mnoa" path="res://graphics/objects/toilet.png" id="2_40mtp"]
+[ext_resource type="Script" path="res://scenes/objects/ItemContainers/toilet.gd" id="2_whumm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5k1tg"]
+size = Vector2(224, 200)
+
+[node name="Toilet" instance=ExtResource("1_d3064")]
+script = ExtResource("2_whumm")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_40mtp")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_5k1tg")

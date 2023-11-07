@@ -8,13 +8,23 @@ radius = 5.0
 height = 124.0
 
 [node name="Laser" type="Area2D"]
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_huuim")
 speed = 2000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_6yyd3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1, 13)
+rotation = 1.5708
 texture = ExtResource("1_7ytsm")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
