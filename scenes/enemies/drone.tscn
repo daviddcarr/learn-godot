@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://73py8r8xbdd8"]
+[gd_scene load_steps=12 format=3 uid="uid://73py8r8xbdd8"]
 
 [ext_resource type="Texture2D" uid="uid://b3x6a8q06sdvx" path="res://graphics/enemies/drone.png" id="1_22nta"]
 [ext_resource type="Script" path="res://scenes/enemies/drone_patrol.gd" id="1_tiay5"]
 [ext_resource type="Shader" path="res://scenes/enemies/scout.gdshader" id="2_7efy8"]
 [ext_resource type="Texture2D" uid="uid://uv62ptschhal" path="res://graphics/explosions/explosion_3.png" id="3_m7p1x"]
+[ext_resource type="AudioStream" uid="uid://7dep7ow7edcl" path="res://audio/solid_impact.ogg" id="5_0mmjs"]
+[ext_resource type="AudioStream" uid="uid://baackxaf258uu" path="res://audio/explosion.wav" id="6_5x0fk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k526r"]
 radius = 710.025
@@ -140,6 +142,14 @@ frame = 1
 libraries = {
 "": SubResource("AnimationLibrary_whyn1")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_0mmjs")
+volume_db = 10.0
+
+[node name="ExplosionAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_5x0fk")
+volume_db = 2.0
 
 [connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
 [connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]

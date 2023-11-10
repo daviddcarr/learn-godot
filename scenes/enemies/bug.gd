@@ -24,6 +24,7 @@ func set_shader_values(value) :
 func hit(amount) :
 	if vulnerable :
 		health -= amount
+		$AudioStreamPlayer2D.play()
 		vulnerable = false
 		$Timers/HitTimer.start()
 		var hit_tween = create_tween()

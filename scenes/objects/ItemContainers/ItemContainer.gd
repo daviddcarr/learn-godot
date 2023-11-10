@@ -6,4 +6,4 @@ var opened : bool = false
 signal open(pos, direction)
 
 func hit(_amount) :
-	pass
+	$AudioStreamPlayer2D.play()

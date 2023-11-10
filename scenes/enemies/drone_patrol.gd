@@ -52,6 +52,7 @@ func _physics_process(delta):
 func hit(amount) :
 	if vulnerable:
 		currentHealth -= amount
+		$AudioStreamPlayer2D.play()
 		vulnerable = false
 		$HitTimer.start()
 		var hit_tween = create_tween()
@@ -62,6 +63,7 @@ func hit(amount) :
 			$AnimationPlayer.play("explosion")
 			
 func explode():
+	$ExplosionAudio.play()
 	var targets = get_tree().get_nodes_in_group('Container') + get_tree().get_nodes_in_group('Entity') 
 	for target in targets :
 		print(target)

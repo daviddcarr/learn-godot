@@ -42,4 +42,7 @@ func _on_body_entered(_body):
 		Globals.laser_amount += 5
 	if type == 'grenade' :
 		Globals.grenade_amount += 3
+	$Sprite2D.hide()
+	$AudioStreamPlayer2D.play()
+	await $AudioStreamPlayer2D.finished
 	queue_free()
