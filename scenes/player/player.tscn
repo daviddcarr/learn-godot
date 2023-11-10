@@ -10,7 +10,7 @@ polygon = PackedVector2Array(1, -61, 17, -58, 30, -52, 34, -44, 40, -40, 39, -35
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgira"]
 radius = 60.0333
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["Entity"]]
 collision_mask = 31
 script = ExtResource("1_6q2le")
 

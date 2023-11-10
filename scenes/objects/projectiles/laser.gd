@@ -11,6 +11,7 @@ func _ready():
 	pos = position
 	rot = rotation
 	$Timer.start()
+	$AudioStreamPlayer2D.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -3,12 +3,18 @@
 [ext_resource type="Script" path="res://scenes/objects/ItemContainers/ItemContainer.gd" id="1_kbx73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ko2pb"]
-size = Vector2(402, 184)
+size = Vector2(396, 172)
 
-[node name="ItemContainer" type="StaticBody2D"]
+[node name="ItemContainer" type="StaticBody2D" groups=["Container"]]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_kbx73")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BaseSprite" type="Sprite2D" parent="."]
+
+[node name="LidSprite" type="Sprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ko2pb")
+
+[node name="SpawnPositions" type="Node2D" parent="."]

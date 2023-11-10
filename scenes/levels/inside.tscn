@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvqrkol0gpurs"]
+[gd_scene load_steps=14 format=3 uid="uid://dvqrkol0gpurs"]
 
 [ext_resource type="PackedScene" uid="uid://r5scpyy2bnhg" path="res://scenes/levels/level.tscn" id="1_y0rpw"]
 [ext_resource type="TileSet" uid="uid://ccmal1v53h0y4" path="res://scenes/levels/tilesets/house.tres" id="2_mx641"]
@@ -7,12 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dncv38uwjh4qs" path="res://scenes/objects/wall_light.tscn" id="3_uwvxd"]
 [ext_resource type="PackedScene" uid="uid://dnav7pi52smgc" path="res://scenes/objects/simple_light.tscn" id="4_v5xrq"]
 [ext_resource type="PackedScene" uid="uid://ctqikggtsoc72" path="res://scenes/objects/ItemContainers/crate.tscn" id="5_csh0r"]
-[ext_resource type="PackedScene" uid="uid://dnelrv47ss78h" path="res://scenes/objects/toilet.tscn" id="6_ouhqs"]
 [ext_resource type="PackedScene" uid="uid://bifli7odvsa53" path="res://scenes/objects/bed.tscn" id="8_jx51l"]
 [ext_resource type="Texture2D" uid="uid://drroub88c5hld" path="res://graphics/decals/blood.png" id="9_q6vjs"]
-[ext_resource type="PackedScene" uid="uid://73py8r8xbdd8" path="res://scenes/enemies/drone.tscn" id="10_8cxbj"]
+[ext_resource type="PackedScene" uid="uid://jahnvby6mcvc" path="res://scenes/objects/ItemContainers/toilet.tscn" id="10_dxr57"]
 [ext_resource type="PackedScene" uid="uid://dd5qa4awp4w6p" path="res://scenes/objects/light_fan_animation.tscn" id="10_uob7h"]
-[ext_resource type="PackedScene" uid="uid://bs288rv8senob" path="res://scenes/items/item.tscn" id="12_45o80"]
+[ext_resource type="PackedScene" uid="uid://dqn28lmqwtljg" path="res://scenes/enemies/bug.tscn" id="11_f7uyd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p32qj"]
 size = Vector2(714, 358)
@@ -61,33 +60,31 @@ rotation = 3.14159
 position = Vector2(-2365, -979)
 rotation = -1.5708
 
-[node name="crate2" parent="Ground" index="6" instance=ExtResource("5_csh0r")]
+[node name="crate3" parent="Ground" index="6" instance=ExtResource("5_csh0r")]
+position = Vector2(-2365, -436)
+rotation = -1.5708
+
+[node name="crate4" parent="Ground" index="7" instance=ExtResource("5_csh0r")]
+position = Vector2(-2366, -2611)
+rotation = -1.5708
+
+[node name="crate2" parent="Ground" index="8" instance=ExtResource("5_csh0r")]
 position = Vector2(2351, -1039)
 rotation = 1.5708
 
-[node name="toilet" parent="Ground" index="7" instance=ExtResource("6_ouhqs")]
-position = Vector2(1262, -642)
-rotation = 1.5708
-
-[node name="Bed" parent="Ground" index="8" instance=ExtResource("8_jx51l")]
+[node name="Bed" parent="Ground" index="9" instance=ExtResource("8_jx51l")]
 position = Vector2(2128, -448)
 
-[node name="Bed2" parent="Ground" index="9" instance=ExtResource("8_jx51l")]
+[node name="Bed2" parent="Ground" index="10" instance=ExtResource("8_jx51l")]
 position = Vector2(2128, -1608)
 
-[node name="Blood" type="Sprite2D" parent="Ground" index="10"]
+[node name="Blood" type="Sprite2D" parent="Ground" index="11"]
 position = Vector2(-1155, -1491)
 texture = ExtResource("9_q6vjs")
 
-[node name="Drone" parent="Enemies" index="0" instance=ExtResource("10_8cxbj")]
-position = Vector2(-1707, -363)
-rotation = -0.821738
-
-[node name="Drone2" parent="Enemies" index="1" instance=ExtResource("10_8cxbj")]
-position = Vector2(-209, -855)
-
-[node name="Drone3" parent="Enemies" index="2" instance=ExtResource("10_8cxbj")]
-position = Vector2(-1760, -1661)
+[node name="Toilet" parent="Ground" index="12" instance=ExtResource("10_dxr57")]
+position = Vector2(1244, -689)
+rotation = 1.5708
 
 [node name="ExitGateArea" type="Area2D" parent="Triggers" index="0"]
 position = Vector2(0, 2)
@@ -97,10 +94,10 @@ collision_layer = 16
 position = Vector2(0, 191)
 shape = SubResource("RectangleShape2D_p32qj")
 
-[node name="Item" parent="Items" index="0" instance=ExtResource("12_45o80")]
-position = Vector2(-588, -854)
+[node name="Bug" parent="Enemies" index="0" instance=ExtResource("11_f7uyd")]
+position = Vector2(-9, -946)
 
-[node name="player" parent="." index="5"]
+[node name="player" parent="." index="6"]
 position = Vector2(58, -413)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true

@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 signal player_fired_laser(pos, rot)
 signal player_fired_grenade(pos, rot)
-signal update_stats
 
 @export var max_speed: int = 500
 
@@ -24,6 +23,7 @@ func _process(_delta):
 	# direction = direction.rotated(rotation)
 	velocity = direction * speed
 	move_and_slide()
+	Globals.player_pos = global_position
 	
 	# rotate, cursor based rotation
 	look_at(get_global_mouse_position())
@@ -76,12 +76,14 @@ func _on_grenade_timer_timeout():
 	print("Grenade Cooldown Up")
 	
 	
-func add_item(type: String) -> void :
-	if type == 'laser' :
-		Globals.laser_amount += 5
-	if type == 'grenade' :
-		Globals.grenade_amount += 3
-	if type == 'health' :
-		print("Increase Health")
-	update_stats.emit()
+#func add_item(type: String) -> void :
+#	if type == 'laser' :
+#		Globals.laser_amount += 5
+#	if type == 'grenade' :
+#		Globals.grenade_amount += 3
+#	if type == 'health' :
+#		print("Increase Health")
+#	update_stats.emit()
 	
+func hit(amount) :
+	Globals.health -= amount

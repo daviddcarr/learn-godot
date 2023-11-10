@@ -8,16 +8,18 @@
 [node name="level" type="Node2D"]
 script = ExtResource("1_gea0j")
 
+[node name="Decals" type="Node2D" parent="."]
+
 [node name="Ground" type="Node2D" parent="."]
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
 
 [node name="Projectiles" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="Triggers" type="Node2D" parent="."]
-
-[node name="Items" type="Node2D" parent="."]
 
 [node name="player" parent="." instance=ExtResource("2_a8565")]
 position = Vector2(574, 495)
@@ -41,4 +43,3 @@ texture_scale = 3.0
 
 [connection signal="player_fired_grenade" from="player" to="." method="_on_player_physics_player_fired_grenade"]
 [connection signal="player_fired_laser" from="player" to="." method="_on_player_physics_player_fired_laser"]
-[connection signal="update_stats" from="player" to="." method="_on_player_update_stats"]

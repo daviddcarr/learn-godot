@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs288rv8senob"]
+[gd_scene load_steps=9 format=3 uid="uid://bs288rv8senob"]
 
 [ext_resource type="Texture2D" uid="uid://bsf487obp24un" path="res://graphics/items/orb2.png" id="1_i2ggw"]
 [ext_resource type="Script" path="res://scenes/items/item.gd" id="1_itgl5"]
@@ -8,28 +8,23 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_js17v"]
 radius = 52.0096
 
-[sub_resource type="Gradient" id="Gradient_s6ls4"]
-offsets = PackedFloat32Array(0.548117, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_bcvjv"]
-gradient = SubResource("Gradient_s6ls4")
-
-[sub_resource type="Curve" id="Curve_aed2n"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.231579), -1.77632, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_lhd47"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.03811, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_6l6iy"]
-curve = SubResource("Curve_aed2n")
+curve = SubResource("Curve_lhd47")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5oi6y"]
+particle_flag_disable_z = true
 spread = 180.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 25.0
-initial_velocity_max = 80.0
+initial_velocity_min = 27.25
+initial_velocity_max = 88.95
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
 scale_min = 0.5
 scale_curve = SubResource("CurveTexture_6l6iy")
-color_ramp = SubResource("GradientTexture1D_bcvjv")
 
 [node name="Item" type="Area2D"]
 collision_layer = 16
@@ -49,5 +44,6 @@ texture_scale = 0.4
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_5oi6y")
 texture = ExtResource("4_7hto4")
+trail_lifetime = 0.01
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

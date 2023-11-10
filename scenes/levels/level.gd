@@ -3,14 +3,39 @@ class_name LevelParent
 
 var laser_scene : PackedScene = preload("res://scenes/objects/projectiles/laser.tscn")
 var grenade_scene : PackedScene = preload("res://scenes/objects/projectiles/grenade.tscn")
+var item_scene : PackedScene = preload("res://scenes/items/item.tscn")
+var death_particles_scene : PackedScene = preload("res://scenes/items/death_particles.tscn")
 
+func _ready() :
+	
+	for container in get_tree().get_nodes_in_group('Container') :
+		print(container)
+		container.connect("open", _on_container_open)
+	for scout in get_tree().get_nodes_in_group("Scouts") :
+		scout.connect("laser", _on_scout_laser)
 
-func _on_gate_player_exited_gate(_body):
-	print("Player has exited gate")
+func _on_container_open(pos, direction) :
+	var item = item_scene.instantiate()
+	item.position = pos
+	item.direction = direction
+	item.connect("item_destroyed", _on_item_destroyed)
+	
+	$Items.call_deferred("add_child", item)
 
+func _on_item_destroyed(pos, color) :
+	print("Item Destroyed")
+	var death_particles = death_particles_scene.instantiate()
+	death_particles.position = pos
+	death_particles.color = color
+	$Items.add_child(death_particles)
 
+func _on_scout_laser(pos, rot) :
+	create_laser(pos, rot)
+	
 func _on_player_physics_player_fired_laser(pos, rot):
-	print("laser from level")
+	create_laser(pos, rot)
+
+func create_laser(pos, rot) : 
 	var laser = laser_scene.instantiate()
 	
 	# 1. update the laser position
@@ -23,10 +48,9 @@ func _on_player_physics_player_fired_laser(pos, rot):
 	# Can move the child's order width the following:
 	# move_child(laser, 0)
 	$UI.update_laser_text()
-
+	
 
 func _on_player_physics_player_fired_grenade(pos, rot):
-	print("grenade from level")
 	var grenade = grenade_scene.instantiate() as RigidBody2D
 	
 	grenade.position = pos
@@ -34,25 +58,4 @@ func _on_player_physics_player_fired_grenade(pos, rot):
 	#grenade.rotation = rot
 	
 	$Projectiles.add_child(grenade)
-	
-	$UI.update_grenade_text()
 
-
-func _on_house_player_entered():
-	print("player has entered house in level")
-	var tween = get_tree().create_tween()
-	# tween.set_parallel(true) # makes animations play together instead of sequentially
-	# tween.set_loops(true) # loopy
-	tween.tween_property($player/Camera2D, "zoom", Vector2(1,1), 1)
-	# ().from(start_value)
-	# ().set_trans(Tween.TRANS_TYPE) # easing
-	# tween.tween_property($player, "modulate:a", 0, 2)
-
-func _on_house_player_left():
-	var tween = get_tree().create_tween()
-	tween.tween_property($player/Camera2D, "zoom", Vector2(0.6,0.6), 1)
-
-
-func _on_player_update_stats():
-	$UI.update_laser_text()
-	$UI.update_grenade_text()

@@ -11,7 +11,10 @@ var red : Color = Color("#FF3333")
 @onready var player_healthbar : TextureProgressBar = $MarginContainer/TextureProgressBar
 
 func _ready() :
-	Globals.connect("health_change", update_health_text)
+	Globals.connect("stat_change", update_stat_text)
+	update_stat_text()
+
+func update_stat_text() :
 	update_laser_text()
 	update_grenade_text()
 	update_health_text()
@@ -24,9 +27,10 @@ func update_grenade_text() :
 	grenade_label.text = str(Globals.grenade_amount)
 	get_label_color(Globals.grenade_amount, grenade_label, grenade_icon)
 	
+func update_health_text() :
+	player_healthbar.value = Globals.health
+	
 func get_label_color(amount : int, label : Label, icon : TextureRect) -> void :
 	label.modulate = green if amount > 0 else red
 	icon.modulate = green if amount > 0 else red
 	
-func update_health_text() :
-	player_healthbar.value = Globals.health

@@ -1,11 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://de1013gpxptx"]
+[gd_scene load_steps=5 format=3 uid="uid://de1013gpxptx"]
 
 [ext_resource type="Texture2D" uid="uid://7cghxi6l1mk8" path="res://graphics/projectiles/blue.png" id="1_7ytsm"]
 [ext_resource type="Script" path="res://scenes/objects/projectiles/laser.gd" id="1_huuim"]
+[ext_resource type="AudioStream" uid="uid://pidtohimjbmq" path="res://audio/laser.wav" id="3_bh66u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6yyd3"]
-radius = 5.0
-height = 124.0
+radius = 3.0
+height = 72.0
 
 [node name="Laser" type="Area2D"]
 collision_layer = 8
@@ -14,17 +15,23 @@ script = ExtResource("1_huuim")
 speed = 2000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(-13, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_6yyd3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-34, 5.96046e-08)
 rotation = 1.5708
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_7ytsm")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bh66u")
+pitch_scale = 1.16
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

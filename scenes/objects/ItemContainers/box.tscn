@@ -7,8 +7,8 @@
 [node name="box" instance=ExtResource("1_duio1")]
 script = ExtResource("2_qbh8q")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="BaseSprite" parent="." index="0"]
 texture = ExtResource("2_ukoit")
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, 1.5)
